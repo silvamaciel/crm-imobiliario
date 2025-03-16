@@ -32,4 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 
+### chavesvscode ###
 src/main/resources/malu-crm-firebase-adminsdk-fbsvc-aca5399f8d.json
+.env
