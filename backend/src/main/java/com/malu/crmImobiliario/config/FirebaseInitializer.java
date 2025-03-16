@@ -1,3 +1,5 @@
+/*
+
 package com.malu.crmImobiliario.config;
 
 import java.io.FileInputStream;
@@ -31,3 +33,5 @@ public class FirebaseInitializer {
         }
     }
 }
+
+*/
