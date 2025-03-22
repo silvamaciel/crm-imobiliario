@@ -41,7 +41,7 @@ public class Lead {
     private String estadoCivil;
 
    @Column(columnDefinition = "jsonb")
-private String informacoesAdicionais;
+    private String informacoesAdicionais;
 
     @Column(length = 500)
     private String endereco;
@@ -58,6 +58,10 @@ private String informacoesAdicionais;
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+
+    @ManyToOne
+@JoinColumn(name = "empresa_id", nullable = false)
+private Empresa empresa;
 
     @PrePersist
     protected void onCreate() {

@@ -24,7 +24,7 @@ public class Apartamento {
     private Float preco;
 
     @Column(columnDefinition = "jsonb")
-private String informacoesAdicionais;
+    private String informacoesAdicionais;
 
     @ManyToOne
     @JoinColumn(name = "empreendimento_id", nullable = false)
