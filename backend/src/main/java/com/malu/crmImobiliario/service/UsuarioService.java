@@ -5,6 +5,7 @@ import com.malu.crmImobiliario.model.Usuario;
 import com.malu.crmImobiliario.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
