@@ -1,4 +1,4 @@
-# 📌 Diagrama de Entidade e Relacionamento (DER) - CRM Imobiliário  
+# 📌 Diagrama de Entidade e Relacionamento (DER) - CRM Imobiliário 
 
 ```mermaid
 erDiagram
