@@ -26,6 +26,13 @@ public class Lead {
 
     private String origem;
 
+    @Column(length = 500)
+    private String informacoesAdicionais;
+
+    @Column(length = 500)
+    private String endereco;
+
+
     @Enumerated(EnumType.STRING)
     private LeadStatus status;
 

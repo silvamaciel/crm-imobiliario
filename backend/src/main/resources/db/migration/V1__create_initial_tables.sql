@@ -14,6 +14,7 @@ CREATE TABLE lead (
     email VARCHAR(255),
     telefone VARCHAR(255) NOT NULL,
     origem VARCHAR(255),
+    informacoes VARCHAR(255),
     status VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     usuario_id UUID REFERENCES usuario(id)
