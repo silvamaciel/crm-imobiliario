@@ -1,12 +1,28 @@
 package com.malu.crmImobiliario.model;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.malu.crmImobiliario.model.enums.LeadStatus;
-import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDateTime;
-import java.util.*;
+import com.malu.crmImobiliario.model.enums.OrigemLead;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Table(name = "leads")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,31 +35,32 @@ public class Lead {
     private UUID id;
 
     private String nome;
-
     private String email;
-
     private String telefone;
+    private String cpf;
+    private String estadoCivil;
 
-    private String origem;
-
-    @Column(length = 500)
-    private String informacoesAdicionais;
+   @Column(columnDefinition = "jsonb")
+private String informacoesAdicionais;
 
     @Column(length = 500)
     private String endereco;
 
-
     @Enumerated(EnumType.STRING)
     private LeadStatus status;
 
+    @Enumerated(EnumType.STRING)
+    private OrigemLead origem;
+
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    private Empreendimento empreendimento;
-
-    @ManyToOne
-    private Apartamento apartamento;
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }
