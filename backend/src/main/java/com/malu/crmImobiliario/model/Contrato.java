@@ -1,19 +1,12 @@
 package com.malu.crmImobiliario.model;
 
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDate;
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
+@Table(name = "contratos")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,13 +18,14 @@ public class Contrato {
     @GeneratedValue
     private UUID id;
 
-    private String data;
-
-    private float valor;
+    private LocalDate data;
+    private Float valor;
 
     @ManyToOne
+    @JoinColumn(name = "lead_id", nullable = false)
     private Lead lead;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "apartamento_id", nullable = false)
     private Apartamento apartamento;
 }

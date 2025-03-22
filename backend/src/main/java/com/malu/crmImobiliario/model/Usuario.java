@@ -1,12 +1,12 @@
 package com.malu.crmImobiliario.model;
 
+import com.malu.crmImobiliario.model.enums.PerfilUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.UUID;
 
-import com.malu.crmImobiliario.model.enums.UserPerfil;
-
 @Entity
+@Table(name = "usuarios")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,15 +19,9 @@ public class Usuario {
     private UUID id;
 
     private String nome;
-
-    @Column(unique = true)
     private String email;
-
     private String senha;
 
     @Enumerated(EnumType.STRING)
-    private UserPerfil perfil;
-
-    @ManyToOne
-    private Empresa empresa;
+    private PerfilUsuario perfil;
 }

@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.UUID;
 
+
+
 @Entity
+@Table(name = "apartamentos")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,12 +19,14 @@ public class Apartamento {
     @GeneratedValue
     private UUID id;
 
-    private int numero;
+    private Integer numero;
+    private Float area;
+    private Float preco;
 
-    private float area;
-
-    private float preco;
+    @Column(columnDefinition = "jsonb")
+private String informacoesAdicionais;
 
     @ManyToOne
+    @JoinColumn(name = "empreendimento_id", nullable = false)
     private Empreendimento empreendimento;
 }
