@@ -1,6 +1,7 @@
 package com.malu.crmImobiliario.service;
 
 
+import com.malu.crmImobiliario.dto.UsuarioDTO;
 import com.malu.crmImobiliario.model.Usuario;
 import com.malu.crmImobiliario.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +17,36 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public List<Usuario> listarTodos() {
-        return usuarioRepository.findAll();
+    public List<UsuarioDTO> listarTodos() {
+        return usuarioRepository.findAll().stream()
+                .map(this::toDTO)
+                .toList();
     }
 
-    public Optional<Usuario> buscarPorId(UUID id) {
-        return usuarioRepository.findById(id);
+    public Optional<UsuarioDTO> buscarPorEmail(String email) {
+        return usuarioRepository.findByEmail(email).map(this::toDTO);
+    }
+    
+    public Optional<UsuarioDTO> buscarPorCpf(String cpf) {
+        return usuarioRepository.findByCpf(cpf).map(this::toDTO);
     }
 
-    public Usuario salvar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public UsuarioDTO salvar(Usuario usuario) {
+        Usuario savedUser = usuarioRepository.save(usuario);
+        return toDTO(savedUser);
     }
 
     public void deletar(UUID id) {
         usuarioRepository.deleteById(id);
+    }
+
+    private UsuarioDTO toDTO(Usuario usuario) {
+        return new UsuarioDTO(
+            usuario.getId(),
+            usuario.getNome(),
+            usuario.getEmail(),
+            usuario.getPerfil(),
+            usuario.getEmpresa().getId()
+        );
     }
 }
