@@ -3,7 +3,6 @@ package com.malu.crmImobiliario.model;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -27,19 +26,20 @@ import jakarta.persistence.CascadeType;
 public class Empresa {
     @Id
     @GeneratedValue
-
     private UUID id;
     private String nome;
     private String cnpj;
 
-   @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Usuario> usuarios = new ArrayList<>();
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Lead> leads = new ArrayList<>();
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Empreendimento> empreendimentos = new ArrayList<>();
-
 
 }
