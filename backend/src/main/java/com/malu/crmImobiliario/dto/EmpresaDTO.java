@@ -1,0 +1,13 @@
+package com.malu.crmImobiliario.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+import java.util.UUID;
+
+@Getter
+@Setter
+public class EmpresaDTO {
+    private UUID id;
+    private String nome;
+    private String cnpj;
+}
