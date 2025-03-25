@@ -1,11 +1,14 @@
 package com.malu.crmImobiliario.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import java.util.UUID;
+
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EmpreendimentoDTO {
     private UUID id;
     private String nome;
