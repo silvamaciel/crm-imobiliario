@@ -22,8 +22,12 @@ CREATE TABLE empreendimento (
     id UUID PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     localizacao VARCHAR(255),
-    informacoes_adicionais JSONB,
     empresa_id UUID NOT NULL,
+    matricula_imovel VARCHAR(255),
+    area_de_lazer VARCHAR(255),
+    registro_de_incorporacao VARCHAR(255),
+    dt_lancamento DATE,
+    previsao_de_entrega DATE,
     FOREIGN KEY (empresa_id) REFERENCES empresa(id) ON DELETE CASCADE
 );
 
