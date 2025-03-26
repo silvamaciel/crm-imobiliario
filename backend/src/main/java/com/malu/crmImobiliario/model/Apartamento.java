@@ -16,15 +16,18 @@ import java.util.UUID;
 public class Apartamento {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private Integer numero;
-    private Float area;
-    private Float preco;
-
-    @Column(columnDefinition = "jsonb")
-    private String informacoesAdicionais;
+    private String numero;
+    private Double area;
+    private Double preco;
+    private String matricula;
+    private String fracaoIdeal;
+    private String bloco;
+    private Integer andar;
+    private Integer quartos;
+    private Integer vagas;
 
     @ManyToOne
     @JoinColumn(name = "empreendimento_id", nullable = false)

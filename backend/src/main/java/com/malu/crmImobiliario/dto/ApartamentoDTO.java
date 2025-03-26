@@ -1,18 +1,17 @@
 package com.malu.crmImobiliario.dto;
 
-import lombok.*;
 import java.util.UUID;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class ApartamentoDTO {
-    private UUID id;
-    private int numero;
-    private double area;
-    private double preco;
-    private UUID empreendimentoId;
-}
-
+public record ApartamentoDTO(
+        UUID id,
+        String numero,
+        Double area,
+        Double preco,
+        String matricula,
+        String fracaoIdeal,
+        String bloco,
+        Integer andar,
+        Integer quartos,
+        Integer vagas,
+        UUID empreendimentoId
+) {}

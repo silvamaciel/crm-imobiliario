@@ -1,12 +1,13 @@
 package com.malu.crmImobiliario.controller;
 
-import com.malu.crmImobiliario.model.Apartamento;
+import com.malu.crmImobiliario.dto.ApartamentoDTO;
 import com.malu.crmImobiliario.service.ApartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -17,20 +18,21 @@ public class ApartamentoController {
     private ApartamentoService apartamentoService;
 
     @GetMapping
-    public List<Apartamento> listarTodos() {
+    public List<ApartamentoDTO> listarTodos() {
         return apartamentoService.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Apartamento> buscarPorId(@PathVariable UUID id) {
-        return apartamentoService.buscarPorId(id)
-                .map(ResponseEntity::ok)
+    public ResponseEntity<ApartamentoDTO> buscarPorId(@PathVariable UUID id) {
+        Optional<ApartamentoDTO> apartamento = apartamentoService.buscarPorId(id);
+        return apartamento.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Apartamento salvar(@RequestBody Apartamento apartamento) {
-        return apartamentoService.salvar(apartamento);
+    public ResponseEntity<ApartamentoDTO> salvar(@RequestBody ApartamentoDTO apartamentoDTO) {
+        ApartamentoDTO novoApartamento = apartamentoService.salvar(apartamentoDTO);
+        return ResponseEntity.ok(novoApartamento);
     }
 
     @DeleteMapping("/{id}")
