@@ -15,5 +15,6 @@ public class ContratoDTO {
     private Date data;
     private double valor;
     private UUID leadId;
+    
     private UUID apartamentoId;
 }
