@@ -1,5 +1,6 @@
 package com.malu.crmImobiliario.controller;
 
+import com.malu.crmImobiliario.dto.EmpreendimentoDTO;
 import com.malu.crmImobiliario.model.Empreendimento;
 import com.malu.crmImobiliario.service.EmpreendimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class EmpreendimentoController {
     }
 
     @PostMapping
-    public Empreendimento salvar(@RequestBody Empreendimento empreendimento) {
-        return empreendimentoService.salvar(empreendimento);
+    public Empreendimento salvar(@RequestBody EmpreendimentoDTO empreendimentoDTO) {
+        return empreendimentoService.salvar(empreendimentoDTO);
     }
 
     @DeleteMapping("/{id}")
