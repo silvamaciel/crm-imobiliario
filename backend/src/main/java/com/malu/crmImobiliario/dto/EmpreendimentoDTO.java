@@ -5,6 +5,9 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
+
+
 
 @Getter
 @Setter
@@ -20,5 +23,7 @@ private String nome;
     private String registroDeIncorporacao;
     private LocalDate dtLancamento;
     private LocalDate previsaoDeEntrega;
+
+    @Column(nullable = false)
     private UUID empresaId;
 }
