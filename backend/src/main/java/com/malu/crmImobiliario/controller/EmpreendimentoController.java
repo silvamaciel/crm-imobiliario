@@ -18,20 +18,53 @@ public class EmpreendimentoController {
     private EmpreendimentoService empreendimentoService;
 
     @GetMapping
-    public List<Empreendimento> listarTodos() {
-        return empreendimentoService.listarTodos();
+    public List<EmpreendimentoDTO> listarTodos() {
+        return empreendimentoService.listarTodos().stream()
+                .map(empreendimento -> new EmpreendimentoDTO(
+                        empreendimento.getId(),
+                        empreendimento.getNome(),
+                        empreendimento.getLocalizacao(),
+                        empreendimento.getMatriculaImovel(),
+                        empreendimento.getAreaDeLazer(),
+                        empreendimento.getRegistroDeIncorporacao(),
+                        empreendimento.getDtLancamento(),
+                        empreendimento.getPrevisaoDeEntrega(),
+                        empreendimento.getEmpresa().getId()
+                ))
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Empreendimento> buscarPorId(@PathVariable UUID id) {
+    public ResponseEntity<EmpreendimentoDTO> buscarPorId(@PathVariable UUID id) {
         return empreendimentoService.buscarPorId(id)
-                .map(ResponseEntity::ok)
+                .map(empreendimento -> ResponseEntity.ok(new EmpreendimentoDTO(
+                        empreendimento.getId(),
+                        empreendimento.getNome(),
+                        empreendimento.getLocalizacao(),
+                        empreendimento.getMatriculaImovel(),
+                        empreendimento.getAreaDeLazer(),
+                        empreendimento.getRegistroDeIncorporacao(),
+                        empreendimento.getDtLancamento(),
+                        empreendimento.getPrevisaoDeEntrega(),
+                        empreendimento.getEmpresa().getId()
+                )))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Empreendimento salvar(@RequestBody EmpreendimentoDTO empreendimentoDTO) {
-        return empreendimentoService.salvar(empreendimentoDTO);
+    public EmpreendimentoDTO salvar(@RequestBody EmpreendimentoDTO empreendimentoDTO) {
+        Empreendimento empreendimento = empreendimentoService.salvar(empreendimentoDTO);
+        return new EmpreendimentoDTO(
+                empreendimento.getId(),
+                empreendimento.getNome(),
+                empreendimento.getLocalizacao(),
+                empreendimento.getMatriculaImovel(),
+                empreendimento.getAreaDeLazer(),
+                empreendimento.getRegistroDeIncorporacao(),
+                empreendimento.getDtLancamento(),
+                empreendimento.getPrevisaoDeEntrega(),
+                empreendimento.getEmpresa().getId()
+        );
     }
 
     @DeleteMapping("/{id}")
