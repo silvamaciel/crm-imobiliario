@@ -1,5 +1,6 @@
 package com.malu.crmImobiliario.controller;
 
+import com.malu.crmImobiliario.dto.EmpresaDTO;
 import com.malu.crmImobiliario.model.Empresa;
 import com.malu.crmImobiliario.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @GetMapping
-    public List<Empresa> listarTodas() {
+    public List<EmpresaDTO> listarTodas() {
         return empresaService.listarTodas();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Empresa> buscarPorId(@PathVariable UUID id) {
+    public ResponseEntity<EmpresaDTO> buscarPorId(@PathVariable UUID id) {
         return empresaService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -38,4 +39,5 @@ public class EmpresaController {
         empresaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
 }
